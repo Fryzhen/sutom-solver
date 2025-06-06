@@ -1,0 +1,73 @@
+<div class="panel">
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="input-length">Length</span>
+    <input (input)="onLengthInput($event)"
+           [value]="length"
+           aria-describedby="input-length"
+           class="form-control"
+           max="10"
+           min="6"
+           type="number">
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="input-first-letter">First Letter</span>
+    <input (input)="onFirstLetterInput($event)"
+           [value]="firtstLetter"
+           aria-describedby="input-first-letter"
+           class="form-control"
+           maxlength="1"
+           type="text">
+  </div>
+  <div>
+    <ng-container *ngIf="displayLinesInput()">
+      <ng-container *ngFor="let i of [].constructor(6); let index = index">
+        <ng-container *ngIf="displayLineInput(index)">
+          <div class="input-group input-group-sm mb-3">
+            <span [ngClass]="{'error': isLineError(index)}"
+                  class="input-group-text"
+                  id="input-first-word">
+              {{ !isWord(index) ? 'This word is not valid' : isLineError(index) ? 'Wrong First Letter' :  'Word ' + (index + 1) }}
+            </span>
+            <input (input)="onWordInput(index, $event)"
+                   [maxLength]="length"
+                   [value]="inputWords[index]"
+                   aria-describedby="input-first-word"
+                   class="form-control"
+                   type="text">
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<ng-container *ngIf="displayGrid()">
+  <div class="panel">
+    <h3>Generated Words</h3>
+    <table class="table">
+      <thead>
+      <th></th>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let word of inputWords, let x = index">
+        <ng-container *ngIf="displayGridLine(word)">
+          <tr>
+            <ng-container *ngFor="let letter of word.split(''), let y = index">
+              <td (click)="cycleCaseType(x,y)">
+              <span
+                [ngClass]="{'wrong-placed': gridLetters[x][y] === CaseType.WrongPlace, 'correct': gridLetters[x][y] == CaseType.Correct, 'wrong': gridLetters[x][y] === CaseType.NotInWord}">
+                {{ letter.toUpperCase() }}
+              </span>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+      </tbody>
+    </table>
+    <button
+      class="btn btn-primary"
+      (click)="generateWords()">
+      Generate Words
+    </button>
+  </div>
+</ng-container>

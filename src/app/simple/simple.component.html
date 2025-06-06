@@ -1,0 +1,40 @@
+<div class="panel">
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="input-length">Length</span>
+    <input (input)="onLengthInput($event)"
+           [value]="length"
+           aria-describedby="input-length"
+           class="form-control"
+           max="10"
+           min="6"
+           type="number">
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="input-first-letter">First Letter</span>
+    <input (input)="onFirstLetterInput($event)"
+           [value]="firtstLetter"
+           aria-describedby="input-first-letter"
+           class="form-control"
+           maxlength="1"
+           pattern="[a-zA-Z]{1}"
+           type="text">
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="input-letters">Letters in word</span>
+    <input (input)="onLetterInWordInput($event)"
+           [value]="letters"
+           aria-describedby="input-letters"
+           class="form-control"
+           pattern="[a-zA-Z]"
+           type="text">
+  </div>
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="exclude-letters">Letters not in word</span>
+    <input (input)="onLetterExcludedInput($event)"
+           [value]="excludeLetters"
+           aria-describedby="exclude-letters"
+           class="form-control"
+           pattern="[a-zA-Z]"
+           type="text">
+  </div>
+</div>
