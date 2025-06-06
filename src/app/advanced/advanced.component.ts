@@ -14,9 +14,9 @@ export enum CaseType {
   styleUrl: "./advanced.component.scss"
 })
 export class AdvancedComponent {
-  length?: number = 8;
-  firtstLetter: string = "A";
-  inputWords: string[] = ["ASTERIXE", "ASSSSINA", "", "", "", ""];
+  length?: number = undefined;
+  firtstLetter: string = "";
+  inputWords: string[] = ["", "", "", "", "", ""];
   gridLetters: CaseType[][] = [[], [], [], [], [], []];
   @Output() words = new EventEmitter<string[]>();
   protected readonly CaseType = CaseType;
