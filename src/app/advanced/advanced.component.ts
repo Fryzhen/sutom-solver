@@ -30,7 +30,10 @@ export class AdvancedComponent {
   generateWords() {
     if (this.length != undefined && this.firtstLetter != "") {
       let excludeLetterSet = new Set<string>();
-      const letterNotInPositionSet: string[][] = Array(this.length).fill(new Set<string>());
+      let letterNotInPositionSet: Set<string>[] = [];
+      for (let i = 0; i < this.length; i++) {
+        letterNotInPositionSet[i] = new Set<string>();
+      }
       const containLetter: string[] = [];
       const letterInPosition: string[] = Array(this.length).fill("");
 
@@ -45,6 +48,7 @@ export class AdvancedComponent {
               letterInPosition[j] = this.inputWords[i][j].toUpperCase();
             } else if (this.gridLetters[i][j] === CaseType.WrongPlace) {
               containLetterLine.push(this.inputWords[i][j].toUpperCase());
+              letterNotInPositionSet[j].add(this.inputWords[i][j].toUpperCase());
             }
           }
           console.log(containLetterLine)
