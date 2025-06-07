@@ -126,7 +126,7 @@ export class AdvancedComponent {
   }
 
   isLineError(index: number) {
-    return (this.inputWords[index] != "" && !this.inputWords[index].toUpperCase().startsWith(this.firtstLetter.toUpperCase())) || !this.isWord(index) ;
+    return (this.inputWords[index] != "" && !this.inputWords[index].toUpperCase().startsWith(this.firtstLetter.toUpperCase())) || !this.isWord(index);
   }
 
   displayGrid() {

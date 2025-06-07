@@ -1,13 +1,10 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-import {NgIf} from "@angular/common";
 import {WordService} from "../word.service";
 
 @Component({
   selector: 'app-simple',
   standalone: true,
-  imports: [
-    NgIf
-  ],
+  imports: [],
   templateUrl: './simple.component.html',
   styleUrl: './simple.component.scss'
 })
@@ -18,7 +15,8 @@ export class SimpleComponent {
   excludeLetters: string = "";
   @Output() words = new EventEmitter<string[]>();
 
-  constructor(private readonly wordService: WordService) {}
+  constructor(private readonly wordService: WordService) {
+  }
 
   onChange() {
     if (!this.letters.includes(this.firtstLetter)) {
