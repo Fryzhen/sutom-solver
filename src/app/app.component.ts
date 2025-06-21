@@ -11,7 +11,7 @@ import {AdvancedComponent} from "./advanced/advanced.component";
   styleUrl: "./app.component.scss"
 })
 export class AppComponent {
-  isSimpleMode: boolean = true;
+  isSimpleMode: boolean = false;
   words: string[] = [];
 
   toggleMode() {

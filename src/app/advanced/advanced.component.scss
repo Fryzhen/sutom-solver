@@ -28,6 +28,53 @@ table {
   }
 }
 
+.line-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  .error-icon {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    height: 24px;
+    width: 24px;
+    background-color: red;
+    aspect-ratio: 1;
+    font-weight: bold;
+    cursor: help;
+    border-radius: 50% !important;
+
+    .tooltiptext {
+      top: -30px;
+      left: -100%;
+      white-space: nowrap;
+      padding-left: 3px;
+      padding-right: 3px;
+      visibility: hidden;
+      background-color: red;
+      color: black;
+      height: 24px;
+      font-size: 15px;
+      border: 1px solid #000;
+      text-align: center;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+    }
+
+    &:hover .tooltiptext {
+      visibility: visible;
+    }
+  }
+
+  .input-group {
+    margin-bottom: 0 !important;
+  }
+}
+
 .error {
   background-color: red;
 }

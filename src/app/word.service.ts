@@ -14,6 +14,11 @@ export class WordService {
     return this.getWords(size, containLetters, excludeLetters)
     .filter((word) => !excludeLetters.some(letter => word.includes(letter.toUpperCase())))
     .filter((word) => word.split("").every((letter, index) => letterInPosition[index] === "" || letterInPosition[index] === letter.toUpperCase()))
+    .filter((word) => {
+      return letterNotInPosition.every((letters, index) => {
+        return !letters.some(letter => word[index] === letter.toUpperCase());
+      });
+    });
   }
 
   getWordsIncludeExclude(size: number, containLetters: string[], excludeLetters: string[], firstLetter: string): string[] {

@@ -1,7 +1,7 @@
 <div class="panel">
   <h1>SUTOM SOLVER</h1>
-  <button (click)="toggleMode()" class="btn btn-primary">
-    Switch to {{ isSimpleMode ? 'Advanced' : 'Simple' }} Mode
+  <button (click)="toggleMode()" class="btn btn-primary button-main">
+    Passer en mode {{ isSimpleMode ? 'avancé' : 'simple' }}
   </button>
 </div>
 <ng-container *ngIf="isSimpleMode">

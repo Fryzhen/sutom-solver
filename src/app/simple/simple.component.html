@@ -1,6 +1,6 @@
 <div class="panel">
   <div class="input-group input-group-sm mb-3">
-    <span class="input-group-text" id="input-length">Length</span>
+    <span class="input-group-text" id="input-length">Taille</span>
     <input (input)="onLengthInput($event)"
            [value]="length"
            aria-describedby="input-length"
@@ -10,7 +10,7 @@
            type="number">
   </div>
   <div class="input-group input-group-sm mb-3">
-    <span class="input-group-text" id="input-first-letter">First Letter</span>
+    <span class="input-group-text" id="input-first-letter">1ère Lettre</span>
     <input (input)="onFirstLetterInput($event)"
            [value]="firtstLetter"
            aria-describedby="input-first-letter"
@@ -20,7 +20,7 @@
            type="text">
   </div>
   <div class="input-group input-group-sm mb-3">
-    <span class="input-group-text" id="input-letters">Letters in word</span>
+    <span class="input-group-text" id="input-letters">Lettres présentes</span>
     <input (input)="onLetterInWordInput($event)"
            [value]="letters"
            aria-describedby="input-letters"
@@ -29,7 +29,7 @@
            type="text">
   </div>
   <div class="input-group input-group-sm mb-3">
-    <span class="input-group-text" id="exclude-letters">Letters not in word</span>
+    <span class="input-group-text" id="exclude-letters">Letters absentes</span>
     <input (input)="onLetterExcludedInput($event)"
            [value]="excludeLetters"
            aria-describedby="exclude-letters"

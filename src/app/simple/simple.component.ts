@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from "@angular/core";
 import {WordService} from "../word.service";
+import {SutomService} from "../sutom.service";
 
 @Component({
   selector: 'app-simple',
@@ -15,7 +16,10 @@ export class SimpleComponent {
   excludeLetters: string = "";
   @Output() words = new EventEmitter<string[]>();
 
-  constructor(private readonly wordService: WordService) {
+  constructor(
+    private readonly wordService: WordService,
+    private readonly sutomService: SutomService
+  ) {
   }
 
   onChange() {
@@ -23,7 +27,11 @@ export class SimpleComponent {
       this.letters = this.firtstLetter.concat(this.letters);
     }
     if (this.length != undefined && this.firtstLetter != "") {
-      this.words.emit(this.wordService.getWordsIncludeExclude(this.length, this.letters.split(''), this.excludeLetters.split(''), this.firtstLetter));
+      this.words.emit(this.wordService.getWordsIncludeExclude(this.length, this.letters.split(''), this.excludeLetters.split(''), this.firtstLetter).sort((a, b) => {
+        const valueA = this.sutomService.getWordValue(a);
+        const valueB = this.sutomService.getWordValue(b);
+        return valueB - valueA;
+      }));
     }
   }
 
