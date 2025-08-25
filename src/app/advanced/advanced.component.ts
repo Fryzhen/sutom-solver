@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-import {WordService} from "../word.service";
+import {WordService} from "../service/word.service";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {SutomService} from "../sutom.service";
+import {SutomService} from "../service/sutom.service";
+import {EntropyAlgorithm} from "../service/algorithm/entopy.algorithm";
 
 export enum CaseType {
   Correct = "correct", WrongPlace = "wrong-place", NotInWord = "not-in-word",
@@ -22,7 +23,8 @@ export class AdvancedComponent {
 
   constructor(
     private readonly wordService: WordService,
-    private readonly sutomService: SutomService
+    private readonly sutomService: SutomService,
+    private readonly algorithm: EntropyAlgorithm
   ) {
     for (let i = 0; i < this.gridLetters.length; i++) {
       this.gridLetters[i] = [CaseType.Correct].concat(Array(9).fill(CaseType.NotInWord));
@@ -59,11 +61,13 @@ export class AdvancedComponent {
         }
       }
     }
+
     const excludeLetter = Array.from(excludeLetterSet).filter(letter => !containLetter.includes(letter));
     const letterNotInPosition = letterNotInPositionSet.map(set => Array.from(set));
+    this.algorithm.trainAdvanced(this.inputWords[0].trim().length, containLetter, excludeLetter, letterInPosition, letterNotInPosition);
     this.words.emit(this.wordService.getWordsLetterPosition(this.inputWords[0].length, containLetter, excludeLetter, letterInPosition, letterNotInPosition).sort((a, b) => {
-      const valueA = this.sutomService.getWordValue(a);
-      const valueB = this.sutomService.getWordValue(b);
+      const valueA = this.algorithm.getWordValue(a);
+      const valueB = this.algorithm.getWordValue(b);
       return valueB - valueA;
     }));
   }
@@ -90,11 +94,11 @@ export class AdvancedComponent {
   }
 
   isWord(word: string): boolean {
-    return this.wordService.isWord(this.sutomService.trimWord(word));
+    return this.wordService.isWord(word.trim()) && word.trim().length === this.inputWords[0].trim().length;
   }
 
   isLineError(index: number): boolean {
-    return (this.inputWords[index].length < 6 || !this.wordService.isWord(this.sutomService.trimWord(this.inputWords[index])));
+    return (this.inputWords[index].length < 6 || !this.wordService.isWord(this.sutomService.trimWord(this.inputWords[index])) || this.inputWords[index].trim().length !== this.inputWords[0].trim().length);
   }
 
   displayLineInput(index: number): boolean {

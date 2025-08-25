@@ -37,7 +37,7 @@
       <ng-container *ngFor="let word of inputWords, let x = index">
         <ng-container *ngIf="isWord(word)">
           <tr>
-            <ng-container *ngFor="let letter of word.split(''), let y = index">
+            <ng-container *ngFor="let letter of word.trim().split(''), let y = index">
               <td (click)="cycleCaseType(x,y)">
               <span
                 [ngClass]="{'wrong-placed': gridLetters[x][y] === CaseType.WrongPlace, 'correct': gridLetters[x][y] == CaseType.Correct, 'wrong': gridLetters[x][y] === CaseType.NotInWord}">

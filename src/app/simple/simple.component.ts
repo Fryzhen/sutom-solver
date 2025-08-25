@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-import {WordService} from "../word.service";
-import {SutomService} from "../sutom.service";
+import {WordService} from "../service/word.service";
+import {EntropyAlgorithm} from "../service/algorithm/entopy.algorithm";
 
 @Component({
   selector: 'app-simple',
@@ -18,7 +18,7 @@ export class SimpleComponent {
 
   constructor(
     private readonly wordService: WordService,
-    private readonly sutomService: SutomService
+    private readonly algorithm: EntropyAlgorithm,
   ) {
   }
 
@@ -27,9 +27,10 @@ export class SimpleComponent {
       this.letters = this.firtstLetter.concat(this.letters);
     }
     if (this.length != undefined && this.firtstLetter != "") {
+      this.algorithm.trainSimple(length, this.letters.split(''), this.excludeLetters.split(''), this.firtstLetter);
       this.words.emit(this.wordService.getWordsIncludeExclude(this.length, this.letters.split(''), this.excludeLetters.split(''), this.firtstLetter).sort((a, b) => {
-        const valueA = this.sutomService.getWordValue(a);
-        const valueB = this.sutomService.getWordValue(b);
+        const valueA = this.algorithm.getWordValue(a);
+        const valueB = this.algorithm.getWordValue(b);
         return valueB - valueA;
       }));
     }
