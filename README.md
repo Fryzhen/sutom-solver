@@ -25,3 +25,18 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Docker
+
+Aucun port n’est publié. L’accès passe par un nom de domaine via Nginx Proxy Manager (réseau Docker `proxy`).
+
+```sh
+docker compose -f docker/docker-compose.yml up -d --build
+```
+
+Dans NPM → Proxy Host :
+
+- Domain Names : `sutom-solver.domaine.fr`
+- Forward Hostname / IP : `sutom-solver`
+- Forward Port : `80`
+- SSL : Request a new SSL Certificate, Force SSL

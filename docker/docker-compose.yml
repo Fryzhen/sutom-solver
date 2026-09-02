@@ -1,0 +1,18 @@
+# Accessible uniquement via NPM (réseau Docker `proxy`).
+# Proxy Host : sutom-solver.domaine.fr → sutom-solver:80
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: sutom-solver:latest
+    container_name: sutom-solver
+    restart: unless-stopped
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    name: ${PROXY_NETWORK:-proxy}
+    external: true
