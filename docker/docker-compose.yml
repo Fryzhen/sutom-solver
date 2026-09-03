@@ -1,5 +1,5 @@
 # Accessible uniquement via NPM (réseau Docker `proxy`).
-# Proxy Host : sutom-solver.domaine.fr → sutom-solver:80
+# Proxy Host : sutom-solver.domaine.fr → sutom-solver:50103
 
 services:
   app:

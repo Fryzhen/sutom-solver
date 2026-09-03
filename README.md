@@ -38,5 +38,5 @@ Dans NPM → Proxy Host :
 
 - Domain Names : `sutom-solver.domaine.fr`
 - Forward Hostname / IP : `sutom-solver`
-- Forward Port : `80`
+- Forward Port : `50103`
 - SSL : Request a new SSL Certificate, Force SSL
