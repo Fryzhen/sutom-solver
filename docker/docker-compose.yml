@@ -3,6 +3,12 @@
 
 name: sutom-solver
 
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   app:
     build:
@@ -11,8 +17,16 @@ services:
     image: sutom-solver:latest
     container_name: sutom-solver
     restart: unless-stopped
+    logging: *default-logging
     networks:
       - proxy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 32M
+        reservations:
+          memory: 8M
 
 networks:
   proxy:
