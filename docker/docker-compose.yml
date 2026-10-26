@@ -14,7 +14,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: sutom-solver:latest
+    image: ghcr.io/fryzhen/sutom-solver:latest
     container_name: sutom-solver
     restart: unless-stopped
     logging: *default-logging
